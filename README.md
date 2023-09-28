@@ -1,2 +1,2 @@
 # end-to-end-ML-Pipeline
-This repo contains code to have an end to end ML pipeline for churn probability.
+This repo contains code to have an end to end ML pipeline for Sentiment Analysis.
