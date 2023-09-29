@@ -42,6 +42,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--train_data_path', required=True)
     parser.add_argument('--val_data_path', required=True)
+    parser.add_argument('--model_saving_dir', required=True)
     args = parser.parse_args()
 
     train_path = args.train_data_path
@@ -80,3 +81,7 @@ if __name__ == "__main__":
 
         print("Training Model....")
         trainer.train()
+        
+        print("Saving trained Model....")
+        #save to s3
+        model.save_pretrained(args.model_saving_dir)
