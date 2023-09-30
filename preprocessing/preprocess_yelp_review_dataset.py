@@ -6,7 +6,7 @@ import re
 import boto3
 import shutil
 import os
-from ..utils import constants
+from endtoendml.utils import constants
 
 # Text cleaning function (customize as needed)
 def clean_text(text):
