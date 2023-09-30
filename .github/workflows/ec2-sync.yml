@@ -30,6 +30,10 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa             
 
+    - name: Test SSH Connection
+      run: ssh -i ~/.ssh/id_rsa -vvv -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "echo 'SSH Test Successful'"
+
+
     # Step to sync the code to the EC2 instance
     - name: Sync to EC2
       run: |
