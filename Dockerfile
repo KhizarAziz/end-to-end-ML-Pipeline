@@ -13,7 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install additional system packages if needed
 RUN apt-get update && apt-get install -y \
     zip \
-    unzip
+    unzip \
+    vim    
+
 
 # Copy your scripts into the container
 COPY my_datasets /endtoendml/my_datasets

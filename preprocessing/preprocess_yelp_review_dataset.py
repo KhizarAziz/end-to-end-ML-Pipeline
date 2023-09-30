@@ -74,6 +74,7 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         print('Saved Training data: ',train_dumpyard_path)
         print('Saved Validation data: ',val_dumpyard_path)        
 
+        print('Creating archives now......... on ',local_train_path)
         # Zip the folders
         shutil.make_archive(local_train_path, 'zip', local_train_path)
         shutil.make_archive(local_val_path, 'zip', local_val_path)
