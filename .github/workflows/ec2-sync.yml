@@ -50,4 +50,4 @@ jobs:
 
     - name: Docker build and restart
       run: |
-        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /home/ec2-user/end-to-end-pipeline-syned && docker-compose down && docker-compose build && docker-compose up -d'
+        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /home/ec2-user/end-to-end-pipeline-syned && docker build -t end-end-ml-image . && docker stop end-end-container-name && docker rm end-end-container-name && docker run -it  --name end-end-container-name -d end-end-ml-image'
