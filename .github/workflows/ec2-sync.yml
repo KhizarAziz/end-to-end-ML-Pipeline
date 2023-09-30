@@ -49,4 +49,4 @@ jobs:
 
     - name: Docker build and restart
       run: |
-        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /home/ec2-user/end-to-end-pipeline-syned && sudo docker build -t end-end-ml-image . && sudo docker stop end-end-container-name && sudo docker rm end-end-container-name && sudo docker run -it  --name end-end-container-name -d end-end-ml-image'
+        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /home/ec2-user/end-to-end-pipeline-syned && sudo docker build -t end-end-ml-image . && (sudo docker stop end-end-container-name || true) && (sudo docker rm end-end-container-name  || true) && sudo docker run -it  --name end-end-container-name -d end-end-ml-image'
