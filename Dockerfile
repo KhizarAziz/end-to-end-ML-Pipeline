@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     unzip
 
 # Copy your scripts into the container
-COPY my_datasets /app-end-end-ml/datasets
+COPY my_datasets /app-end-end-ml/my_datasets
 COPY preprocessing /app-end-end-ml/preprocessing
 COPY utils /app-end-end-ml/utils
 COPY _end_end_ml_pipeline.ipynb /app-end-end-ml/_end_end_ml_pipeline.ipynb
