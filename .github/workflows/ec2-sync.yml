@@ -23,7 +23,12 @@ jobs:
     - name: Prepare SSH directory
       run: |
         mkdir -p ~/.ssh
-        chmod 700 ~/.ssh      
+        chmod 700 ~/.ssh 
+
+    - name: Setup SSH key
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa             
 
     # Step to sync the code to the EC2 instance
     - name: Sync to EC2
