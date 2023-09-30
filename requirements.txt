@@ -1,6 +1,7 @@
 transformers
 datasets
 accelerate
+shutil
 boto3
 sklearn
 PyYAML

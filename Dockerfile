@@ -26,6 +26,3 @@ COPY training_config.yaml /app-end-end-ml/training_config.yaml
 
 # Command to run when the container starts
 CMD [ "bash" ]
-
-
-# docker build -t end-end-ml-image . && docker stop end-end-container-name && docker rm end-end-container-name && docker run -it  --name end-end-container-name -d end-end-ml-image
