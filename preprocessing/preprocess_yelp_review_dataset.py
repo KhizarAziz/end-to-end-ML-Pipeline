@@ -6,7 +6,7 @@ import re
 import boto3
 import shutil
 import os
-from utils import constants
+from ..utils import constants
 
 # Text cleaning function (customize as needed)
 def clean_text(text):
@@ -85,6 +85,7 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         print(f"Saved Validation data to S3: {val_dumpyard_path}.zip")
     except Exception as e:
         print(f"Error dumping to S3: {e}")
+
 
 import argparse
 
