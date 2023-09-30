@@ -1,2 +1,2 @@
 import os
-BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+BUCKET_NAME = os.environ.get('end-to-end-sentiment-analysis-ml-bucket')

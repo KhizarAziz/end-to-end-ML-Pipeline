@@ -27,9 +27,9 @@ def clean_text(text):
 
 def load_dataset(dataset_path, chunk_size):
     try:
-        json_reader = pd.read_json(dataset_path, lines=True, chunksize=chunk_size)
+        df = pd.read_csv(dataset_path)
         print("Dataset Loaded!")
-        return next(json_reader)
+        return df
     except Exception as e:
         logging.error(f"Failed to load dataset: {e}")
         return None
@@ -94,7 +94,6 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset_path', required=True)
-    parser.add_argument('--chunk_size', type=int, required=True)
     args = parser.parse_args()
 
     df = load_dataset(args.dataset_path, args.chunk_size)
