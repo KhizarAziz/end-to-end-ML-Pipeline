@@ -74,17 +74,17 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         print('Saved Training data: ',train_dumpyard_path)
         print('Saved Validation data: ',val_dumpyard_path)        
 
-        print('Creating archives now......... on ',local_train_path)
+        print('Creating archives now......... on ')
         # Zip the folders
         shutil.make_archive(train_dumpyard_path, 'zip', train_dumpyard_path)
         shutil.make_archive(val_dumpyard_path, 'zip', val_dumpyard_path)
-        print('Created Zip files ')
+        print('Created Zip file:', train_dumpyard_path + '.zip')
 
 
         print('attempting to save in s3 on : ',constants.BUCKET_NAME + train_dumpyard_path )
         # Upload zipped folders to S3
-        s3.upload_file(Filename='train.zip', Bucket=constants.BUCKET_NAME, Key=train_dumpyard_path + '.zip')
-        s3.upload_file(Filename='val.zip', Bucket=constants.BUCKET_NAME, Key=val_dumpyard_path + '.zip')
+        s3.upload_file(Filename=train_dumpyard_path + '.zip', Bucket=constants.BUCKET_NAME, Key=train_dumpyard_path + '.zip')
+        s3.upload_file(Filename=val_dumpyard_path + '.zip', Bucket=constants.BUCKET_NAME, Key=val_dumpyard_path + '.zip')
 
         print(f"Saved Training data to S3: {train_dumpyard_path}.zip")
         print(f"Saved Validation data to S3: {val_dumpyard_path}.zip")
