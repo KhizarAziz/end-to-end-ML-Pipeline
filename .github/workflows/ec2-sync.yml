@@ -19,6 +19,11 @@ jobs:
     # Step to checkout the code from the current repo
     - name: Checkout code
       uses: actions/checkout@v2
+      
+    - name: Prepare SSH directory
+      run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh      
 
     # Step to sync the code to the EC2 instance
     - name: Sync to EC2
