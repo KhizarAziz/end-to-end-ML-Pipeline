@@ -64,7 +64,7 @@ def preprocess_data(df):
         return None, None
 
 # Initialize S3 client
-s3 = boto3.client('s3')
+s3 = boto3.client('s3',region_name='your-bucket-region')
 def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard_path):
     try:
 
@@ -81,7 +81,7 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         print('Created Zip file:', train_zip_path)
 
         # Upload zipped folders to S3
-        path_in_bucket = 'datasets/yelp_processed_data/'
+        path_in_bucket = '/datasets/yelp_processed_data/'
         output_file_name_train = train_zip_path.split('/')[-1]
         output_file_name_valid = val_zip_path.split('/')[-1]
         print('Saving into bucket on path:', constants.BUCKET_NAME + path_in_bucket + output_file_name_train)
