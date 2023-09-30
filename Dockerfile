@@ -21,6 +21,7 @@ COPY preprocessing /app-end-end-ml/preprocessing
 COPY utils /app-end-end-ml/utils
 COPY _end_end_ml_pipeline.ipynb /app-end-end-ml/_end_end_ml_pipeline.ipynb
 
+COPY __init__.py /app-end-end-ml/__init__.py
 COPY train.py /app-end-end-ml/train.py
 COPY training_config.yaml /app-end-end-ml/training_config.yaml
 
