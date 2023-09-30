@@ -64,7 +64,7 @@ def preprocess_data(df):
         return None, None
 
 # Initialize S3 client
-s3 = boto3.client('s3',region_name='your-bucket-region')
+s3 = boto3.client('s3')
 def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard_path):
     try:
 
