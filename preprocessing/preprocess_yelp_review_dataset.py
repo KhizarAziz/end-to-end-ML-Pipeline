@@ -28,6 +28,7 @@ def clean_text(text):
 def load_dataset(dataset_path, chunk_size):
     try:
         json_reader = pd.read_json(dataset_path, lines=True, chunksize=chunk_size)
+        print("Dataset Loaded!")
         return next(json_reader)
     except Exception as e:
         logging.error(f"Failed to load dataset: {e}")
@@ -97,7 +98,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     df = load_dataset(args.dataset_path, args.chunk_size)
-    print("Dataset Loaded!")
     if df is not None:
         clean_data(df)
         print("Dataset Cleaned!")
