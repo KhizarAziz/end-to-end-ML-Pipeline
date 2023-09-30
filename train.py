@@ -1,6 +1,8 @@
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification, Trainer, TrainingArguments
 from datasets import load_from_disk
 import logging
+import argparse
+import yaml
 
 
 # Initialize the tokenizer
@@ -33,10 +35,6 @@ def set_pytorch_format(data):
         data.set_format("torch", columns=["input_ids", "attention_mask", "label"])
     except Exception as e:
         logging.error(f"Failed to set PyTorch format: {e}")
-
-import argparse
-import yaml
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

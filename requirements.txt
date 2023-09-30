@@ -1,3 +1,7 @@
-pip install transformers
-pip install datasets
-pip install accelerate -U
+transformers
+datasets
+accelerate -U
+shutil
+boto3
+sklearn
+PyYAML

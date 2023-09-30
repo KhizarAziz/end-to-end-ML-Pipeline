@@ -3,6 +3,10 @@ from sklearn.model_selection import train_test_split
 from datasets import Dataset
 import logging
 import re
+import boto3
+import shutil
+import os
+from utils import constants
 
 # Text cleaning function (customize as needed)
 def clean_text(text):
@@ -58,17 +62,32 @@ def preprocess_data(df):
         logging.error(f"Preprocessing failed: {e}")
         return None, None
 
-def dump_to_s3(train_data,val_data,train_dumpyard_path,val_dumpyard_path):
-    # dump data into S3
-    # Using Hugging Face's Datasets
-    train_data.save_to_disk(train_dumpyard_path) # "./datasets/train_data/"
-    print('Saved Training data: ',train_dumpyard_path)
-    val_data.save_to_disk(val_dumpyard_path) # "./datasets/val_data/"
-    print('Saved Validation data: ',val_dumpyard_path)
+# Initialize S3 client
+s3 = boto3.client('s3')
+def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard_path):
+    try:
+
+        # Using Hugging Face's Datasets
+        train_data.save_to_disk(train_dumpyard_path) # "./datasets/train_data/"
+        val_data.save_to_disk(val_dumpyard_path) # "./datasets/val_data/"
+        print('Saved Training data: ',train_dumpyard_path)
+        print('Saved Validation data: ',val_dumpyard_path)        
+
+        # Zip the folders
+        shutil.make_archive(local_train_path, 'zip', local_train_path)
+        shutil.make_archive(local_val_path, 'zip', local_val_path)
+
+        # Upload zipped folders to S3
+        s3.upload_file(Filename=local_train_path + '.zip', Bucket=constants.BUCKET_NAME, Key=train_dumpyard_path + '.zip')
+        s3.upload_file(Filename=local_val_path + '.zip', Bucket=constants.BUCKET_NAME, Key=val_dumpyard_path + '.zip')
+
+        print(f"Saved Training data to S3: {train_dumpyard_path}.zip")
+        print(f"Saved Validation data to S3: {val_dumpyard_path}.zip")
+    except Exception as e:
+        print(f"Error dumping to S3: {e}")
+
 
 import argparse
-
-
 
 if __name__ == "__main__":
 
@@ -87,7 +106,10 @@ if __name__ == "__main__":
         train_data, val_data = preprocess_data(df)
         print("Dataset Cleaned!")
 
-        # try to dump to s3
+        # Saving data locally and s3
         train_dumpyard_path = '/'.join(args.dataset_path.split('/')[:-1]) + '/train_set/'
         val_dumpyard_path = '/'.join(args.dataset_path.split('/')[:-1]) + '/val_set/'
-        dump_to_s3(train_data,val_data,train_dumpyard_path,val_dumpyard_path)
+        dump_to_local_and_s3(train_data,val_data,train_dumpyard_path,val_dumpyard_path)
+
+
+
