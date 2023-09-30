@@ -28,5 +28,5 @@ COPY training_config.yaml /app-end-end-ml/training_config.yaml
 CMD [ "bash" ]
 
 
-# Run docker build -t your-image-name .
-# Run docker run -it --name your-container-name your-image-name
+# docker build -t end-end-ml-image .
+# docker run -it --name end-end-container-name end-end-ml-image

@@ -1,6 +1,6 @@
 transformers
 datasets
-accelerate -U
+accelerate
 shutil
 boto3
 sklearn

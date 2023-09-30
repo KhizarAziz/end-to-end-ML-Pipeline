@@ -46,3 +46,8 @@ jobs:
         HOST: ${{ secrets.HOST }}            # EC2 hostname
         USERNAME: ${{ secrets.USERNAME }}    # SSH username for EC2
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH private key for authentication
+
+
+    - name: Docker build and restart
+      run: |
+        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd /home/ec2-user/end-to-end-pipeline-syned && docker-compose down && docker-compose build && docker-compose up -d'
