@@ -25,7 +25,7 @@ def clean_text(text):
 
     return text
 
-def load_dataset(dataset_path, chunk_size):
+def load_dataset(dataset_path):
     try:
         df = pd.read_csv(dataset_path)
         print("Dataset Loaded!")
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     parser.add_argument('--dataset_path', required=True)
     args = parser.parse_args()
 
-    df = load_dataset(args.dataset_path, args.chunk_size)
+    df = load_dataset(args.dataset_path)
     if df is not None:
         clean_data(df)
         print("Dataset Cleaned!")
