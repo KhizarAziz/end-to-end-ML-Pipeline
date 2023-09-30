@@ -2,5 +2,5 @@ transformers
 datasets
 accelerate
 boto3
-sklearn
+scikit-learn
 PyYAML
