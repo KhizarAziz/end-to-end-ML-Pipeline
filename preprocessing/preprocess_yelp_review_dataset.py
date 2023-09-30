@@ -77,7 +77,10 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         # Zip the folders
         shutil.make_archive(local_train_path, 'zip', local_train_path)
         shutil.make_archive(local_val_path, 'zip', local_val_path)
+        print('Created Zip files ')
 
+
+        print('attempting to save in s3 on : ',constants.BUCKET_NAME + train_dumpyard_path )
         # Upload zipped folders to S3
         s3.upload_file(Filename=local_train_path + '.zip', Bucket=constants.BUCKET_NAME, Key=train_dumpyard_path + '.zip')
         s3.upload_file(Filename=local_val_path + '.zip', Bucket=constants.BUCKET_NAME, Key=val_dumpyard_path + '.zip')
@@ -103,7 +106,7 @@ if __name__ == "__main__":
         feature_engineering(df)
         print("Dataset Engineered!")
         train_data, val_data = preprocess_data(df)
-        print("Dataset Cleaned!")
+        print("Dataset preprocessed!")
 
         # Saving data locally and s3
         train_dumpyard_path = '/'.join(args.dataset_path.split('/')[:-1]) + '/train_set/'
