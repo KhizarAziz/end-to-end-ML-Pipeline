@@ -82,9 +82,9 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         print('Created Zip file:', train_zip_path)
 
         # Upload zipped folders to S3
-        output_file_name_train = str(constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME_
+        output_file_name_train = str(constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME)
         output_file_name_val = str(constants.YELP_DATA_DIR_PATH / constants.VAL_DATA_ZIP_FILENAME)
-        print('Saving into bucket on path:', constants.BUCKET_NAME / output_file_name_train)
+        print('Saving into bucket on path:', constants.BUCKET_NAME + output_file_name_train)
         s3.upload_file(Filename=train_zip_path, Bucket=constants.BUCKET_NAME, Key=output_file_name_train)
         s3.upload_file(Filename=val_zip_path, Bucket=constants.BUCKET_NAME, Key=output_file_name_val)
 

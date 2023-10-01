@@ -17,21 +17,21 @@ def load_preprocessed_data(): #loading from s3
     try:
 
         # bring zip files from s3 to local dir and unzip
-        train_path = str(YELP_DATA_DIR_PATH / TRAIN_DATA_ZIP_FILENAME)
-        val_path = str(YELP_DATA_DIR_PATH / VAL_DATA_ZIP_FILENAME)
+        train_path = str(constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME)
+        val_path = str(constants.YELP_DATA_DIR_PATH / VAL_DATA_ZIP_FILENAME)
         s3.download_file(Bucket=constants.BUCKET_NAME, Key=train_path, Filename=train_path)
         s3.download_file(Bucket=constants.BUCKET_NAME, Key=val_path, Filename=val_path)
 
         print('downloaded from s3')
         #unzip
-        shutil.unpack_archive(TRAIN_DATA_ZIP_FILENAME, YELP_DATA_DIR_PATH)
-        shutil.unpack_archive(TRAIN_DATA_ZIP_FILENAME, YELP_DATA_DIR_PATH)
-        print('Unzipped to ',YELP_DATA_DIR_PATH)
+        shutil.unpack_archive(constants.TRAIN_DATA_ZIP_FILENAME, constants.YELP_DATA_DIR_PATH)
+        shutil.unpack_archive(constants.TRAIN_DATA_ZIP_FILENAME, constants.YELP_DATA_DIR_PATH)
+        print('Unzipped to ',constants.YELP_DATA_DIR_PATH)
 
         
         #get unzip path as train_path
-        train_data = load_from_disk(YELP_DATA_DIR_PATH)
-        val_data = load_from_disk(YELP_DATA_DIR_PATH)
+        train_data = load_from_disk(constants.YELP_DATA_DIR_PATH)
+        val_data = load_from_disk(constants.YELP_DATA_DIR_PATH)
         return train_data, val_data
     except Exception as e:
         logging.error(f"Failed to load preprocessed data: {e}")
@@ -61,8 +61,8 @@ if __name__ == "__main__":
     # parser.add_argument('--model_saving_dir', required=True)
     # args = parser.parse_args()
 
-    # train_path = constants.BUCKET_NAME / YELP_DATA_DIR_PATH / TRAIN_DATA_ZIP_FILENAME
-    # val_path = constants.BUCKET_NAME / YELP_DATA_DIR_PATH / TRAIN_DATA_ZIP_FILENAME
+    # train_path = constants.BUCKET_NAME / constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME
+    # val_path = constants.BUCKET_NAME / constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME
     # model_saving_dir = constants.BUCKET_NAME / constants.MODEL_SAVING_DIR_S3
 
     train_data, val_data = load_preprocessed_data()
