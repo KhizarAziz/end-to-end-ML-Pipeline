@@ -81,15 +81,15 @@ def dump_to_local_and_s3(train_data, val_data, train_dumpyard_path, val_dumpyard
         print('Created Zip file:', train_zip_path)
 
         # Upload zipped folders to S3
-        path_in_bucket = '/datasets/yelp_processed_data/'
+        path_in_bucket = 'datasets/yelp_processed_data/'
         output_file_name_train = train_zip_path.split('/')[-1]
         output_file_name_val = val_zip_path.split('/')[-1]
         print('Saving into bucket on path:', constants.BUCKET_NAME + path_in_bucket + output_file_name_train)
         s3.upload_file(Filename=train_zip_path, Bucket=constants.BUCKET_NAME, Key=path_in_bucket + output_file_name_train)
         s3.upload_file(Filename=val_zip_path, Bucket=constants.BUCKET_NAME, Key=path_in_bucket + output_file_name_val)
 
-        print(f"Saved Training data to S3: {train_zip_path}")
-        print(f"Saved Validation data to S3: {val_zip_path}")
+        print(f"Saved Training data to S3: {path_in_bucket + output_file_name_train}")
+        print(f"Saved Validation data to S3: {path_in_bucket + output_file_name_val}")
     except Exception as e:
         print(f"Error dumping to S3: {e}")
 
@@ -118,3 +118,5 @@ if __name__ == "__main__":
 
 
 
+
+# python3 -m preprocessing.preprocess_yelp_review_dataset --dataset_path my_datasets/yelp_dataset/yelp_academic_dataset_review.csv
