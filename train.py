@@ -3,6 +3,7 @@ from datasets import load_from_disk
 import logging
 import argparse
 import yaml
+import shutil
 
 
 # Initialize the tokenizer
