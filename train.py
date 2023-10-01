@@ -25,14 +25,15 @@ def load_preprocessed_data(): #loading from s3
 
         print('downloaded from s3')
         #unzip
-        shutil.unpack_archive(constants.TRAIN_DATA_ZIP_FILENAME, constants.YELP_DATA_DIR_PATH)
-        shutil.unpack_archive(constants.VAL_DATA_ZIP_FILENAME, constants.YELP_DATA_DIR_PATH)
+        shutil.unpack_archive(str(constants.TRAIN_DATA_ZIP_FILENAME), str(constants.YELP_DATA_DIR_PATH))
+        shutil.unpack_archive(str(constants.VAL_DATA_ZIP_FILENAME), str(constants.YELP_DATA_DIR_PATH))
+        
         print('Unzipped to ',constants.YELP_DATA_DIR_PATH)
 
         
         #get unzip path as train_path
-        train_data = load_from_disk(constants.YELP_DATA_DIR_PATH)
-        val_data = load_from_disk(constants.YELP_DATA_DIR_PATH)
+        train_data = load_from_disk(str(constants.YELP_DATA_DIR_PATH))
+        val_data = load_from_disk(str(constants.YELP_DATA_DIR_PATH))
         return train_data, val_data
     except Exception as e:
         logging.error(f"Failed to load preprocessed data: {e}")
