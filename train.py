@@ -18,20 +18,21 @@ def load_preprocessed_data(): #loading from s3
     try:
 
         # bring zip files from s3 to local dir and unzip
-        train_path = str(constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME)
+        train_zip_file_path = str(constants.YELP_DATA_DIR_PATH / constants.TRAIN_DATA_ZIP_FILENAME)
         val_path = str(constants.YELP_DATA_DIR_PATH / constants.VAL_DATA_ZIP_FILENAME)
-        s3.download_file(Bucket=constants.BUCKET_NAME, Key=train_path, Filename=train_path)
+        s3.download_file(Bucket=constants.BUCKET_NAME, Key=train_zip_file_path, Filename=train_zip_file_path)
         s3.download_file(Bucket=constants.BUCKET_NAME, Key=val_path, Filename=val_path)
 
         print('downloaded from s3')
         #unzip
-        shutil.unpack_archive(str(constants.TRAIN_DATA_ZIP_FILENAME), str(constants.YELP_DATA_DIR_PATH))
-        shutil.unpack_archive(str(constants.VAL_DATA_ZIP_FILENAME), str(constants.YELP_DATA_DIR_PATH))
+        print('unzipping,' train_zip_file_path, 'to ',str(constants.YELP_DATA_DIR_PATH))
+        shutil.unpack_archive(train_zip_file_path, str(constants.YELP_DATA_DIR_PATH))
+        shutil.unpack_archive(val_path, str(constants.YELP_DATA_DIR_PATH))
         
         print('Unzipped to ',constants.YELP_DATA_DIR_PATH)
 
         
-        #get unzip path as train_path
+        #get unzip path as train_zip_file_path
         train_data = load_from_disk(str(constants.YELP_DATA_DIR_PATH))
         val_data = load_from_disk(str(constants.YELP_DATA_DIR_PATH))
         return train_data, val_data
