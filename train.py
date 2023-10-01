@@ -17,8 +17,10 @@ def load_preprocessed_data(): #loading from s3
     try:
 
         # bring zip files from s3 to local dir and unzip
-        s3.download_file(Bucket=constants.BUCKET_NAME, Key=YELP_DATA_DIR_PATH / TRAIN_DATA_ZIP_FILENAME, Filename=YELP_DATA_DIR_PATH / TRAIN_DATA_ZIP_FILENAME)
-        s3.download_file(Bucket=constants.BUCKET_NAME, Key=YELP_DATA_DIR_PATH / VAL_DATA_ZIP_FILENAME, Filename=YELP_DATA_DIR_PATH / VAL_DATA_ZIP_FILENAME)
+        train_path = str(YELP_DATA_DIR_PATH / TRAIN_DATA_ZIP_FILENAME)
+        val_path = str(YELP_DATA_DIR_PATH / VAL_DATA_ZIP_FILENAME)
+        s3.download_file(Bucket=constants.BUCKET_NAME, Key=train_path, Filename=train_path)
+        s3.download_file(Bucket=constants.BUCKET_NAME, Key=val_path, Filename=val_path)
 
         print('downloaded from s3')
         #unzip
