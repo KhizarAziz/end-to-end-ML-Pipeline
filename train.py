@@ -24,8 +24,9 @@ def load_preprocessed_data(): #loading from s3
         s3.download_file(Bucket=constants.BUCKET_NAME, Key=val_path, Filename=val_path)
 
         print('downloaded from s3')
-        #unzip
-        print('unzipping,' train_zip_file_path, 'to ',str(constants.YELP_DATA_DIR_PATH))
+        #unziping : Currently these both files are inzipping into same dir... which means val.zip files will overwrite train_zip files
+        #fix issueeeeeee
+        print('unzipping ', train_zip_file_path, 'to ',str(constants.YELP_DATA_DIR_PATH))
         shutil.unpack_archive(train_zip_file_path, str(constants.YELP_DATA_DIR_PATH))
         shutil.unpack_archive(val_path, str(constants.YELP_DATA_DIR_PATH))
         
@@ -44,7 +45,9 @@ def tokenize_data(train_data, val_data, tokenize_function):
     try:
         print("Tokenizing Dataset....")
         train_data_tokenized = train_data.map(tokenize_function, batched=True)
+        print("Train data Tokenized DONE!")
         val_data_tokenized = val_data.map(tokenize_function, batched=True)
+        print("Val data Tokenized DONE!")
         return train_data_tokenized, val_data_tokenized
     except Exception as e:
         logging.error(f"Tokenization failed: {e}")
