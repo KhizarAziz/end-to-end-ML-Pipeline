@@ -1,2 +1,29 @@
-# end-to-end-ML-Pipeline
-This repo contains code to have an end to end ML pipeline.
+## Introduction
+This repo have a starter code for End-to-end ML pipeline for preprocessing and trainnig along with CI/CD and apache airflow for scheduling the training repeatidely. 
+
+## Components
+The repository contains ____ modeules
+
+## Prerequisites
+- Docker
+
+## How to Run
+Adding soon
+
+
+## Future works
+Adding soon
+
+## Testing
+Adding soon
+
+## Troubleshooting
+Adding soon
+
+## Contributions
+Feel free to submit pull requests or open issues to contribute to the project.
+
+## License
+(TBD)
+
+
