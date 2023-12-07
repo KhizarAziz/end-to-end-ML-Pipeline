@@ -1,5 +1,5 @@
 ## Introduction
-This repo have a starter code for End-to-end ML pipeline for preprocessing and trainnig along with CI/CD and apache airflow for scheduling the training repeatidely. 
+This repo have a starter code for automated ML pipeline for preprocessing and trainnig along with CI/CD and apache airflow for scheduling the training repeatidely. 
 
 ## Components
 The repository contains ____ modeules
